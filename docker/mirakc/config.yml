@@ -1,0 +1,36 @@
+epg:
+  cache-dir: /var/lib/mirakc/epg
+
+server:
+  addrs:
+    - unix: /var/run/mirakc.sock
+    - http: '0.0.0.0:40772'
+  stream-chunk-size: 4096
+  stream-max-chunks: 30000
+
+channels:
+  - name: NHK
+    type: GR
+    channel: '27'
+
+tuners:
+  - name: PX-S1UD_0
+    types: [GR]
+    command: >-
+      recdvb --dev 0 --b25 --strip {{channel}} {{duration}} -
+  - name: PX-S1UD_1
+    types: [GR]
+    command: >-
+      recdvb --dev 1 --b25 --strip {{channel}} {{duration}} -
+
+#filters:
+  # Optionally, you can specify a command to process TS packets before sending
+  # them to a client.
+  #
+  # The following command processes TS packets on a remote server listening on
+  # TCP port 40774.
+  #decode-filter:
+  #  command: >-
+  #    socat -,cool-write tcp-connect:remote:40774
+  #  command: >-
+  #    /etc/mirakc/bin/arib-b25-stream-test
