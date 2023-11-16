@@ -11,7 +11,7 @@ env:
   GHCR_REGISTRY: ghcr.io
   DOCKERHUB_REGISTRY: docker.io
   IMAGE_NAME: ${{ github.repository }}
-  DOCKERHUB_IMAGE_NAME: your_dockerhub_username/your_image_name
+  DOCKERHUB_IMAGE_NAME: junch25/mirack-epgstation-px-x1ud
 
 jobs:
   build:
