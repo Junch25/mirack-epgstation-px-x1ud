@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+  mirakc:
+    image: mirakc-debian
+    build:
+      context: ../
+      dockerfile: debian/Dockerfile
+    container_name: mirakc-debian
+    hostname: mirakc
+    init: true
+    restart: unless-stopped
+    devices:
+      - /dev/dvb
+      - /dev/bus
+    ports:
+      - 40772:40772
+    volumes:
+      - mirakc-epg:/var/lib/mirakc/epg
+      - ../mirakc/config.yml:/etc/mirakc/config.yml:ro
+      - ../mirakc/mirakc_init.sh:/usr/local/bin/mirakc_init.sh:ro
+    command:
+      - "/usr/bin/chmod"
+      - "755"
+      - "/usr/local/bin/mirakc_init.sh"
+    environment:
+      TZ: Asia/Tokyo
+      RUST_LOG: info,mirakc=debug
+      MIRAKC_DEBUG_CHILD_PROCESS: 1
+      MIRAKC_ARIB_LOG: info,filter-service=debug,filter-program=debug
+      MIRAKC_ARIB_LOG_NO_TIMESTAMP: 1
+
+  mysql:
+    image: mariadb:10.5
+    volumes:
+      - mysql-db:/var/lib/mysql
+    environment:
+      MYSQL_USER: epgstation
+      MYSQL_PASSWORD: epgstation
+      MYSQL_ROOT_PASSWORD: epgstation
+      MYSQL_DATABASE: epgstation
+      TZ: "Asia/Tokyo"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --performance-schema=false --expire_logs_days=1
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  epgstation:
+    image: l3tnun/epgstation:debian
+    volumes:
+      - ../epgstation/config:/app/config
+      - ../epgstation/data:/app/data
+      - ../epgstation/thumbnail:/app/thumbnail
+      - ../epgstation/logs:/app/logs
+      - ../epgstation/recorded:/app/recorded
+    environment:
+      TZ: "Asia/Tokyo"
+    depends_on:
+      - mirakc
+      - mysql
+    ports:
+      - "8888:8888"
+      - "8889:8889"
+    restart: always
+
+volumes:
+  mirakc-epg:
+    driver: local
+  mysql-db:
+    driver: local
