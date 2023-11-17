@@ -14,6 +14,12 @@ This Docker has been tested on Debian systems.
 ご自身の環境に合わせお使いください。  
 Please use it according to your own environment.
 
+## Driver install
+px-x1udのドライバーインストールが必要な場合、下記からインストールお願いします。  
+If you need to install the driver for px-x1ud, please install it from the following link.
+
+[px-x1ud-driver-install](https://github.com/Junch25/px-x1ud-driver-install)
+
 
 ## Docker Setup
 ```bash
