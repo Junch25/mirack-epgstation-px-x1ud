@@ -7,10 +7,35 @@ px-x1udシリーズデバイス専用のmirackとepgstation用のDockerビルド
 
 [![dockeri.co](https://dockerico.blankenship.io/image/junch25/mirack-epgstation-px-x1ud)](https://hub.docker.com/r/junch25/mirack-epgstation-px-x1ud)
 
+## Docker Setup
+```bash
+$ curl -sSL https://get.docker.com/ | CHANNEL=stable sh
+$ sudo usermod -aG docker $USER
+$ sudo apt install docker-compose
+```
+## install / インストール
+```bash
+$ git clone https://github.com/Junch25/mirack-epgstation-px-x1ud.git
+$ cd mirack-epgstation-px-x1ud/setup
 
+# Edit docker-compose.yml / ご自身の環境に合わせて修正ください。
+$ vim docker-compose.yml
+
+# Edit config.yml / ご自身の環境に合わせて修正ください。
+$ vim ../mirakc/config.yml
+
+# install / インストール実行
+$ ./setup.sh
+
+## Ex. docker command
+# start
+$ docker-compose up -d
+# log
+$ docker-compose logs -f
+# stop
+$ docker-compose down
+```
 ## build / 構築
-Prerequisite[前提]:
-Docker pre-built. / Docker構築済みであること。
 ```bash
 $ git clone https://github.com/Junch25/mirack-epgstation-px-x1ud.git
 $ cd mirack-epgstation-px-x1ud/docker/debian
