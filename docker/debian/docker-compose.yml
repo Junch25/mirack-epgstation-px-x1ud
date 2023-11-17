@@ -17,11 +17,6 @@ services:
     volumes:
       - mirakc-epg:/var/lib/mirakc/epg
       - ../mirakc/config.yml:/etc/mirakc/config.yml:ro
-      - ../mirakc/mirakc_init.sh:/usr/local/bin/mirakc_init.sh:ro
-    command:
-      - "/usr/bin/chmod"
-      - "755"
-      - "/usr/local/bin/mirakc_init.sh"
     environment:
       TZ: Asia/Tokyo
       RUST_LOG: info,mirakc=debug
