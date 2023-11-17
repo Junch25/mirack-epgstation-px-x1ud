@@ -1,8 +1,8 @@
 version: '3.8'
 services:
   mirakc:
-    image: mirakc-debian
-    container_name: mirakc-debian
+    image: junch25/mirack-epgstation-px-x1ud:latest
+    container_name: mirakc
     hostname: mirakc
     init: true
     restart: unless-stopped
@@ -13,13 +13,10 @@ services:
       - 40772:40772
     volumes:
       - mirakc-epg:/var/lib/mirakc/epg
-      - ../mirakc/config.yml:/etc/mirakc/config.yml:ro
+      - ./config.yml:/etc/mirakc/config.yml:ro
     environment:
       TZ: Asia/Tokyo
-      RUST_LOG: info,mirakc=debug
-      MIRAKC_DEBUG_CHILD_PROCESS: 1
-      MIRAKC_ARIB_LOG: info,filter-service=debug,filter-program=debug
-      MIRAKC_ARIB_LOG_NO_TIMESTAMP: 1
+      RUST_LOG: info
 
   mysql:
     image: mariadb:10.5
@@ -41,11 +38,11 @@ services:
   epgstation:
     image: l3tnun/epgstation:debian
     volumes:
-      - ../epgstation/config:/app/config
-      - ../epgstation/data:/app/data
-      - ../epgstation/thumbnail:/app/thumbnail
-      - ../epgstation/logs:/app/logs
-      - ../epgstation/recorded:/app/recorded
+      - ./epgstation/config:/app/config
+      - ./epgstation/data:/app/data
+      - ./epgstation/thumbnail:/app/thumbnail
+      - ./epgstation/logs:/app/logs
+      - ./epgstation/recorded:/app/recorded
     environment:
       TZ: "Asia/Tokyo"
     depends_on:
