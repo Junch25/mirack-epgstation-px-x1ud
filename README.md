@@ -1,6 +1,6 @@
 # mirack-epgstation-px-x1ud
-Docker build for mirack and epgstation, specifically for px-x1ud series devices.   
 px-x1udシリーズデバイス専用のmirackとepgstation用のDockerビルド。
+Docker build for mirack and epgstation, specifically for px-x1ud series devices.   
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Junch25/mirack-epgstation-px-x1ud/.github%2Fworkflows%2Fbuild.yml?style=for-the-badge&label=Docker%20image%20publish)　
 ![Docker Automated build](https://img.shields.io/docker/automated/junch25/mirack-epgstation-px-x1ud?style=for-the-badge&color=blue)
