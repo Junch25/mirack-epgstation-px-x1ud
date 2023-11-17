@@ -7,6 +7,14 @@ px-x1udシリーズデバイス専用のmirackとepgstation用のDockerビルド
 
 [![dockeri.co](https://dockerico.blankenship.io/image/junch25/mirack-epgstation-px-x1ud)](https://hub.docker.com/r/junch25/mirack-epgstation-px-x1ud)
 
+## Introduction
+こちらのDockerですが、Debian系で動作確認済みとなります。  
+This Docker has been tested on Debian systems.
+
+ご自身の環境に合わせお使いください。  
+Please use it according to your own environment.
+
+
 ## Docker Setup
 ```bash
 $ curl -sSL https://get.docker.com/ | CHANNEL=stable sh
