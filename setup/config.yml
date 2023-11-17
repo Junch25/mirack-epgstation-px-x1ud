@@ -1,0 +1,50 @@
+epg:
+  cache-dir: /var/lib/mirakc/epg
+
+server:
+  addrs:
+    - unix: /var/run/mirakc.sock
+    - http: '0.0.0.0:40772'
+  stream-chunk-size: 4096
+  stream-max-chunks: 30000
+
+channels:
+  - name: TOKYO MX
+    type: GR
+    channel: '16'
+  - name: フジテレビ
+    type: GR
+    channel: '21'
+  - name: TBS
+    type: GR
+    channel: '22'
+  - name: テレビ東京
+    type: GR
+    channel: '23'
+  - name: テレビ朝日
+    type: GR
+    channel: '24'
+  - name: 日テレ
+    type: GR
+    channel: '25'
+  - name: NHKEテレ・東京
+    type: GR
+    channel: '26'
+  - name: NHK総合・東京
+    type: GR
+    channel: '27'
+
+tuners:
+  - name: PX-S1UD_0
+    types: [GR]
+    command: >-
+      recdvb --dev 0 {{channel}} {{duration}} -
+  - name: PX-S1UD_1
+    types: [GR]
+    command: >-
+      recdvb --dev 1 {{channel}} {{duration}} -
+
+filters:
+  decode-filter:
+    command: >-
+      /usr/local/bin/arib-b25-stream-test -v 0
